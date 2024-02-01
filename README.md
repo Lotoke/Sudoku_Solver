@@ -1,15 +1,19 @@
+## Note:
+
+This is a University coursework project produced
+
 # Sudoku Solver
 
-The aim of this project was to create a program that takes a 3D numpy array representation of a sudoku puzzle and return either the correct solution or an array of -1's in the same format.
+The aim of this project was to create a program that takes a 3D numpy array representation of a sudoku puzzle and returns either the correct solution or an array of -1's in the same format.
 
 The program uses a depth first search algorithm to explore the possible states that the sudoku can take for each valid number that can go into a blank cell.
 
 ## Optimisations:
 
 A basic depth first search algorithm has exponential time complexity and the recursive approach uses large amounts of memory, therefore backtracking needed to be minimised.
-The main optimisation applied was constraint satisfaction. This was implemented by giving each empty cell of the sudoku a 'domain' of possible values it can take within the constraints (rules) of the puzzle. Every time one of the empty cells is filled in, all of the domains are updated. This significantly reduces the number of paths that need to be explored to find a solution, and helps to identify paths than will not lead to the goal.
+The main optimisation applied was constraint satisfaction. This was implemented by giving each empty cell in the sudoku a 'domain' of possible values it can take within the constraints (rules) of the puzzle. Every time one of the empty cells is filled in, all of the domains are updated. This significantly reduces the number of paths that need to be explored to find a solution, and helps to identify paths than will not lead to the goal.
 
-A further optimization was made by ordering the empty cells by the number of values in their domains, and choosing the cells with less domain values to be explored first. For example, filling all of the spaces that only have one possible value first narrows down the remaining domains. The very easy to medium sodukus solve very quickly as the cell with the smallest domain is picked each time and no backtracking is required.
+A further optimization was made by ordering the empty cells by the number of values in their domains, and choosing the cells with less domain values to be explored first. For example, filling all of the spaces that only have one possible value first narrows down the remaining domains. The very easy - medium sodukus solve very quickly as the cell with the smallest domain is picked each time and no backtracking is required.
 
 ## Functions and Classes:
 
@@ -57,12 +61,12 @@ The DFS process is outlined below:
 
   - If the partial state is the goal state, all recursive instances are popped off the call stack and the solved sudoku is returned.
 
-When the program backtracks, it returns to the parent of the sudoku state it came from and chooses the next number in the current cell's domain. If it iterates through all domain values without finding a suitable suitable value for that cell, the program backtracks further.
+When the program backtracks, it returns to the parent of the sudoku state it came from and chooses the next number in the current cell's domain. If it iterates through all domain values without finding a suitable value for that cell, the program backtracks further.
 
 ## Evaluation & Improvements:
 
-The agent is able to solve all provided sudokus correctly within a 'reasonable' amount of time. On the hardware the code was tested with, medium sudokus often solved in less than 0.01 seconds. Hard sudokus that had valid solutions could be solved in less than 4 seconds however it took over 8 seconds to determine if a hard sudoku was invalid. As previously mentioned, reducing the number of times backtracking is required could significantly improve the time complexity. Ordering the cells by length of their domains significantly reduced the solve time for hard sudokus, however the values picked from the domains to fill cells is largely trial and error.  
-As described by Kevin Coulombe (Coulombe, 2010), it is sometimes possible to deduce which value must go in in a specific cell by looking at the other empty cells in the same quadrant, column and row. For example, if one of the domain values of an empty cell is 4, and the domains of all other cells in the same quadrant do not contain a 4, then the correct value for this cell must be 4. Further improvements may be possible by investigating strategies humans use to complete sudokus.
+The agent is able to solve all provided sudokus correctly within a 'reasonable' amount of time. On the hardware the code was tested with, medium sudokus often solved in less than 0.01 seconds. Hard sudokus that had valid solutions could be solved in less than 4 seconds however it took over 8 seconds to determine if a hard sudoku was invalid. As previously mentioned, reducing the number of times backtracking is required could significantly improve the completion time. Ordering the cells by length of their domains significantly reduced the solve time for hard sudokus, however the process in which values are picked from the domains to fill cells is largely trial and error.  
+As described by Kevin Coulombe (Coulombe, 2010), it is sometimes possible to deduce which value must go in a specific cell by looking at the other empty cells in the same quadrant, column and row. For example, if one of the domain values of an empty cell is 4, and the domains of all other cells in the same quadrant do not contain a 4, the correct value for this cell must be 4. Further improvements may be possible by investigating strategies humans use to complete sudokus.
 
 ## References:
 
