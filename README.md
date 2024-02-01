@@ -1,6 +1,6 @@
 ## Note:
 
-This is a University coursework project produced
+This is a University coursework project produced for the 'Artificial Intelligence' module I completed.
 
 # Sudoku Solver
 
